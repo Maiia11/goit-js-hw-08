@@ -71,11 +71,11 @@ function createGallery(arr) {
   return arr
     .map((image) =>
       `<li class="gallery-item">
-      <a class="gallery-link" href="${image.original}">
+    <a class="gallery-link" href="${image.original}">
     <img
       class="gallery-image"
       src="${image.preview}"
-      data-source="${original}"
+      data-source="${image.original}"
       alt="${image.description}"
       width: 1128;
       height: 200px;
@@ -95,8 +95,7 @@ function handleClick(event) {
   }
   const currentImage = event.target.closest(".gallery-item");
   const imageSource = currentImage.dataset.source;
-  console.log(imageSource);
-  const image = images.find(item => item.original === imageSource);
+  const image = images.find(item => item.source === imageSource);
 
   const instance = basicLightbox.create(
     `<div class="modal">
