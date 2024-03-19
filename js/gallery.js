@@ -66,6 +66,7 @@ const images = [
 
 const container = document.querySelector(".gallery");
 container.insertAdjacentHTML("beforeend", createGallery(images));
+container.addEventListener("click", handleClick);
 
 function createGallery(arr) {
   return arr
@@ -77,8 +78,6 @@ function createGallery(arr) {
       src="${image.preview}"
       data-source="${image.original}"
       alt="${image.description}"
-      width: 1128;
-      height: 200px;
     />
     </a>
 </li>`)
@@ -86,16 +85,15 @@ function createGallery(arr) {
   
 }
 
-container.addEventListener("click", handleClick);
 
 function handleClick(event) {
   event.preventDefault();
   if (event.target === event.currentTarget) {
     return;
   }
-  const currentImage = event.target.closest(".gallery-item");
+  const currentImage = event.target.closest(".gallery-image");
   const imageSource = currentImage.dataset.source;
-  const image = images.find(item => item.source === imageSource);
+  const image = images.find(item => item.original === imageSource);
 
   const instance = basicLightbox.create(
     `<div class="modal">
